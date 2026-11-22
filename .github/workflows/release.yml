@@ -36,5 +36,5 @@ jobs:
             -d "grant_type=client_credentials" | jq -r .access_token)
           curl -s -X PUT -H "Authorization: Bearer $TOKEN" \
             -H "Content-Type: application/pdf" \
-            --data-binary @resume.pdf \
+            --data-binary @main.pdf \
             "https://graph.microsoft.com/v1.0/users/$UPN/drive/root:/PipelineOutputs/resume.pdf:/content"
