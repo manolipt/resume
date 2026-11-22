@@ -1,0 +1,104 @@
+%% resume.sty -- layout and content commands for a one-page resume.
+%% Brand tokens (colors, fonts, type scale, icons) come from design.sty;
+%% this package adds the resume-specific header, timeline and rows.
+%% Content lives in resume.tex.
+%% Build with XeLaTeX (two runs, so the timeline can find its nodes):
+%%     xelatex resume.tex && xelatex resume.tex
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{resume}[Resume layout functions for building my personal resume(s).]
+
+\RequirePackage{design}
+\RequirePackage{multicol}
+\RequirePackage{etoolbox}
+
+% =====================================================================
+%  RESUME LAYOUT TOKENS  (edit these)
+% =====================================================================
+\newlength{\rsBandH}    \setlength{\rsBandH}{2.45cm}   % header band height
+\newlength{\rsHintW}    \setlength{\rsHintW}{2.35cm}   % date / label column
+\newlength{\rsSepW}     \setlength{\rsSepW}{0.4cm}     % gap between date column and text (timeline sits here)
+\newlength{\rsTop}      \setlength{\rsTop}{3.0cm}      % top margin (clears the header band)
+
+\geometry{top=\rsTop}
+
+% =====================================================================
+%  HEADER:  \resumehead{Full name}{ \contact{..}{..} ... }
+% =====================================================================
+% \contact[url]{icon}{text}: one line in the contact block; the optional url makes it a link.
+\newcommand{\contact}[3][]{%
+  \makebox[1.3em][c]{#2}\hspace{0.35em}%
+  \ifblank{#1}{#3}{\href{#1}{#3}}\\}
+\newcommand{\resumehead}[2]{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \shade[left color=ink,right color=inkb]
+      (current page.north west) rectangle ([yshift=-\rsBandH]current page.north east);
+    \fill[amber] ([yshift=-\rsBandH]current page.north west)
+      rectangle ([yshift=-\rsBandH-0.5mm]current page.north east);
+    \node[anchor=west,text=white,inner sep=0]
+      at ([xshift=\dsMargin,yshift=-0.5\rsBandH]current page.north west)
+      {\dsHeadFont\dsDisplaySize #1};
+    \node[anchor=east,text=white,inner sep=0,align=left]
+      at ([xshift=-\dsMargin,yshift=-0.5\rsBandH]current page.north east)
+      {\dsMonoFont\dsMonoSize\begin{tabular}{@{}l@{}}#2\end{tabular}};
+  \end{tikzpicture}}
+
+% =====================================================================
+%  TIMELINE  (hollow circle per entry, dotted line joining entries in a section)
+% =====================================================================
+\tikzset{
+  rs ms/.style={circle,inner sep=1.5pt,draw=steellight},
+  rs link/.style={thick,densely dotted,color=steellight},
+}
+\newcounter{rs@chain}\setcounter{rs@chain}{0}
+\newcounter{rs@node}\setcounter{rs@node}{0}
+\def\rs@resetchain{\stepcounter{rs@chain}\setcounter{rs@node}{0}}
+\def\rs@milestone{%
+  \edef\rs@prev{rs-\thers@chain-\thers@node}%
+  \stepcounter{rs@node}%
+  \edef\rs@this{rs-\thers@chain-\thers@node}%
+  \tikz[remember picture,overlay]{%
+    \node[rs ms] (\rs@this) at (-0.5\rsSepW,0.3em) {};
+    \ifnum\value{rs@node}>1
+      \pgfpointdiff{\pgfpointanchor{\rs@prev}{center}}{\pgfpointanchor{\rs@this}{center}}%
+      \ifnum\pgf@y>0
+        \draw[rs link] (\rs@this) -- ([yshift=-1em] \rs@this |- current page.north);
+      \else
+        \draw[rs link] (\rs@this) -- (\rs@prev);
+      \fi
+    \fi}}
+
+% =====================================================================
+%  CONTENT COMMANDS
+% =====================================================================
+% \cvsection{Title}  -- amber bar + heading; starts a new timeline.
+\newcommand{\cvsection}[1]{%
+  \rs@resetchain
+  \vspace{7pt}\noindent\textcolor{amber}{\rule[-0.3em]{2pt}{1.2em}}\hspace{6pt}%
+  {\dsHeadFont\dsHeadingSize #1}\par\vspace{3pt}}
+
+% two-column row: left = date/label (right-aligned, mono), right = main text
+\newcommand{\rs@row}[3]{% #1 left content, #2 right content, #3 vertical gap after
+  \noindent\begin{minipage}[t]{\rsHintW}\raggedleft\textcolor{steel}{\dsMonoFont\dsMonoSize #1}\end{minipage}%
+  \hspace{\rsSepW}%
+  \begin{minipage}[t]{\dimexpr\textwidth-\rsHintW-\rsSepW\relax}#2\end{minipage}\par\vspace{#3}}
+
+% \cventry{dates}{Role or degree}{Organization}{Location}{description or bullets}
+%   Location is right-aligned. Organization, location and description may be left empty.
+\newcommand{\cventry}[5]{%
+  \rs@row{#1}{%
+    \rs@milestone
+    \strut{\bfseries #2}\ifblank{#3}{}{, \textit{#3}}%
+    \ifblank{#4}{}{\hfill #4}\par
+    #5}{3pt}}
+
+% \cvitem{Label}{text}   -- label in the date column, text in body font
+\newcommand{\cvitem}[2]{\rs@row{#1}{#2}{2pt}}
+% \cvskill{Label}{a, b, c}   -- same, text in the mono face
+\newcommand{\cvskill}[2]{\rs@row{#1}{{\dsMonoFont\dsMonoSize #2}}{2pt}}
+
+% references: \begin{cvrefs} \cvref{Name}{detail} ... \end{cvrefs}   (two columns)
+\setlength{\multicolsep}{0pt}
+\newenvironment{cvrefs}{\begin{multicols}{2}\raggedcolumns}{\end{multicols}}
+\newcommand{\cvref}[2]{\textbf{#1} -- #2\par}
+
+\endinput

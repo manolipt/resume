@@ -1,0 +1,90 @@
+%% design.sty -- core design tokens shared by every branded document.
+%% Colors, typefaces, type scale, page defaults, bullets and icons live here;
+%% document-specific layout belongs in its own package (e.g. resume.sty).
+%% Requires XeLaTeX or LuaLaTeX (fontspec).
+%%
+%% Fonts are loaded from \dsFontPath (default: fonts/, relative to the document).
+%% To use a shared font folder, define it before loading the package:
+%%     \newcommand{\dsFontPath}{/path/to/fonts/}
+%%     \usepackage{design}
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{design}[Core design tokens for documents related to my personal brand.]
+
+\RequirePackage{fontspec}
+\RequirePackage{xcolor}
+\RequirePackage{tikz}
+\RequirePackage{enumitem}
+\RequirePackage{ragged2e}
+\RequirePackage{microtype}
+\RequirePackage[hidelinks]{hyperref}
+
+% =====================================================================
+%  DESIGN TOKENS  (edit these)
+% =====================================================================
+
+% -- color --
+\definecolor{ink}{HTML}{14212E}        % text and dark surfaces (start of gradient)
+\definecolor{inkb}{HTML}{22384D}       % dark surfaces (end of gradient)
+\definecolor{amber}{HTML}{E8871E}      % the single accent: rules, bars, icons
+\definecolor{steel}{HTML}{5B6B7A}      % secondary text: dates, labels, bullets
+\definecolor{steellight}{HTML}{C9D1D8} % hairlines, dotted lines, quiet shapes
+
+% -- type: font file names (without extension) in \dsFontPath --
+\providecommand{\dsFontPath}{fonts/}
+\newcommand{\dsBody}{Sofia}            % expects -Regular -Bold -Italic -BoldItalic
+\newcommand{\dsHead}{SofiaCond-Bold}   % headings and display text
+\newcommand{\dsMono}{Martian}          % expects -Regular -Bold; data, labels, contact
+\newcommand{\dsDisplaySize}{\fontsize{28}{30}\selectfont}
+\newcommand{\dsHeadingSize}{\Large}
+\newcommand{\dsMonoSize}{\fontsize{8}{12}\selectfont}
+
+% -- space --
+\newlength{\dsMargin}   \setlength{\dsMargin}{0.5in}   % left/right page margin
+\newlength{\dsBottom}   \setlength{\dsBottom}{0.4in}   % bottom page margin
+
+% =====================================================================
+%  FONTS
+% =====================================================================
+\defaultfontfeatures{Ligatures=TeX}
+\setmainfont[Path=\dsFontPath,Extension=.ttf,UprightFont=\dsBody-Regular,
+  BoldFont=\dsBody-Bold,ItalicFont=\dsBody-Italic,BoldItalicFont=\dsBody-BoldItalic]{\dsBody-Regular}
+\newfontfamily\dsHeadFont[Path=\dsFontPath,Extension=.ttf,SmallCapsFont={\dsHead},SmallCapsFeatures={}]{\dsHead}
+\newfontfamily\dsMonoFont[Path=\dsFontPath,Extension=.ttf,UprightFont=\dsMono-Regular,BoldFont=\dsMono-Bold]{\dsMono-Regular}
+\newfontfamily\dsIconSolid[Path=\dsFontPath,Extension=.otf]{FA-Solid}
+\newfontfamily\dsIconRegular[Path=\dsFontPath,Extension=.otf]{FA-Regular}
+\newfontfamily\dsIconBrands[Path=\dsFontPath,Extension=.otf]{FA-Brands}
+
+% =====================================================================
+%  PAGE AND TEXT DEFAULTS
+% =====================================================================
+% Top margin defaults to \dsMargin; documents adjust it with \geometry{top=...}.
+\RequirePackage[a4paper,left=\dsMargin,right=\dsMargin,top=\dsMargin,bottom=\dsBottom]{geometry}
+\usetikzlibrary{shadings}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\RaggedRight
+\hyphenpenalty=10000 \exhyphenpenalty=10000
+\AtBeginDocument{\color{ink}}
+
+% bullet styles: level 1 = small circle, level 2 = en dash
+\setlist[itemize,1]{label={\raisebox{0.18ex}{\tikz\draw[line width=.4pt,steel](0,0)circle(.75pt);}},
+  leftmargin=1.05em,itemsep=1pt,topsep=2pt,parsep=0pt,partopsep=0pt}
+\setlist[itemize,2]{label={\textcolor{steel}{\textendash}},
+  leftmargin=1.05em,itemsep=0.5pt,topsep=1pt,parsep=0pt,partopsep=0pt}
+
+% =====================================================================
+%  ICONS  (Font Awesome 7 Free; add more by codepoint)
+% =====================================================================
+% \dsIcon{font}{codepoint}: accent-colored glyph.
+% Icons are tagged with empty ActualText so copy-paste and resume parsers skip them.
+% (The tagging uses an xdvipdfmx \special, so it is XeLaTeX-specific.)
+\newcommand{\dsIcon}[2]{{\color{amber}%
+  \special{pdf:literal direct /Span <</ActualText <FEFF>>> BDC}%
+  #1\symbol{"#2}%
+  \special{pdf:literal direct EMC}}}
+\newcommand{\iconphone}{\dsIcon{\dsIconSolid}{F3CF}}
+\newcommand{\iconmail}{\dsIcon{\dsIconRegular}{F0E0}}
+\newcommand{\iconlinkedin}{\dsIcon{\dsIconBrands}{F0E1}}
+\newcommand{\icongithub}{\dsIcon{\dsIconBrands}{F09B}}
+
+\endinput
