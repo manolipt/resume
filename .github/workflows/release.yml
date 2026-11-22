@@ -1,0 +1,48 @@
+name: Build and release resume
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Serialize runs so the per-day build counter can't race.
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # need existing tags to compute the build number
+
+      - name: Compile (XeLaTeX)
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: main.tex
+          latexmk_use_xelatex: true
+
+      - name: Compute version tag
+        id: version
+        run: |
+          # Tag format: YYYY-MM-DD_NN (ISO date sorts chronologically; NN = nth build today, UTC)
+          today=$(date -u +%Y-%m-%d)
+          count=$(git tag --list "${today}_*" | wc -l)
+          tag=$(printf '%s_%02d' "$today" $((count + 1)))
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.version.outputs.tag }}
+        run: |
+          cp main.pdf resume.pdf
+          gh release create "$TAG" resume.pdf \
+            --target "$GITHUB_SHA" \
+            --title "Resume $TAG" \
+            --notes "Automated build of ${GITHUB_SHA::7}."
