@@ -23,56 +23,54 @@
   \contact[https://linkedin.com/in/manoliptram]{\iconlinkedin}{manoliptram}
   \contact[https://github.com/manolipt]{\icongithub}{manolipt}}
 
+\cvsection{Summary}
+
+\par Automation Engineer who builds industrial edge platforms end to end, from PLC and CNC control code to event-driven MQTT architectures, containerized deployment, and fleet device identity.
+\\
+
 \cvsection{Experience}
 
-\cventry{2025--Present}{Senior Automation Engineer}{Modumetal}{Snohomish, WA}{%
+\cventry{2026--Present}{Senior Automation Engineer}{Modumetal}{Snohomish, WA}{%
 \begin{itemize}
-\item Designed and built the NanoPro 5.0 software platform for nanolamination control in TwinCAT.
-  \begin{itemize}
-  \item Created initial PLC software package from scratch in a week to support an emergency deployment only a month into employment.
-  \item Developed reusable standard library using OOP with Structured Text (ST) to easily slot new device drivers into existing process logic.
-  \item Reduced deployment preparation time from 90+ days to 20 business days (>70\% reduction).
-  \item Supported 10+ successful global deployments of the technology at customer electroplating lines.
-  \end{itemize}
-\item Shouldered additional IT responsibilities to improve employee productivity and facilitate necessary tool access.
-  \begin{itemize}
-  \item Worked with the company's MSP to accommodate the use of software development and engineering tools.
-  \item Overhauled SharePoint intranet to support implementation of a QMS for ISO 9001 compliance.
-  \item Led integration efforts to grant access to and develop company security postures around AI tools.
-  \item Developed endpoint management policies in Intune to allow company employees to use macOS devices.
-  \end{itemize}
-\item Supporting the implementation of a company web portal for elevated customer experience.
-  \begin{itemize}
-  \item Provided React frontend development guidance to junior engineers while learning the technology.
-  \item Utilizing ASP.NET Core to create a backend API with supporting relational database and blob storage.
-  \item Setting up infrastructure-as-code using Aspire to make deployment straightforward and reproducible.
-  \end{itemize}
-\item Architecting the next-generation NanoPro platform using modern software development technologies.
-  \begin{itemize}
-  \item Utilizing event-driven architecture (EDA) with a custom MQTT schema for separation-of-concerns.
-  \item Creating a modern web-based HMI using ASP.NET Core Web API with a React frontend.
-  \item Streamlining deployment techniques with OCI containers.
-  \item Bootstrapping a PKI system designed ground-up for the NanoPro fleet.
-  \end{itemize}
-\item Supervising two early-career engineers to assist in feature development and global deployment support.
+\item Architect the next-generation NanoPro edge platform. It uses an event-driven MQTT layer to separate device control, process logic, and HMI; runs as OCI-containerized services; and has a purpose-built PKI for device identity across the fleet.
+\item Hired and led two early-career engineers through feature development and on-site deployment support. Both were independently handling customer deployments within 6 months of onboarding.
+\item Delivered 10+ software deployments on customer electroplating lines across 7 countries.
+\item Build the web HMI and customer portal on ASP.NET Core and React, with relational and blob storage, using Aspire for infrastructure-as-code.
+\item Drove OT/IT integration: endpoint policy in Intune (including macOS), security posture for AI tool adoption, GitHub Enterprise administration, and a SharePoint QMS supporting ISO 9001.
+\end{itemize}}
+
+\cventry{2025--2026}{Automation Engineer}{Modumetal}{Snohomish, WA}{%
+\begin{itemize}
+\item Designed and built the NanoPro 5.0 control platform in TwinCAT, shipping the first PLC package in one week for an emergency customer deployment a month after joining.
+\item Built a reusable object-oriented Structured Text library so new device drivers plug into existing process logic, cutting deployment prep from 90+ days to 20 business days (>70\%).
+\item Delivered 4 software deployments solo on customer electroplating lines across 4 countries.
 \end{itemize}}
 
 \cventry{2023--2025}{Controls Engineer}{Electroimpact}{Mukilteo, WA}{%
 \begin{itemize}
-\item Developed FANUC PMC Ladder and C motion control programs compliant with machine and class 4 laser safety standards in high-speed manufacturing.
-\item Utilized laser tracking with Spatial Analyzer to reduce machine error to under 0.3 millimeters in a work envelope over 600 cubic meters in volume.
-\item Built a company UI framework in C\# with WPF to streamline HMI development for machines utilizing FANUC and Siemens CNC controllers.
-\item Managed acquisition and deployment of OEM PCs and appropriate licenses for air-gapped systems.
-\item Supported legacy WinForms HMI applications to improve operator experience and efficiency.
-\item Assisted in process development for Automated Fiber Placement (AFP) and Automated Tape Layup (ATL) machines to optimize machine performance and layup quality.
+\item Designed a C\#/WPF HMI framework that abstracts FANUC and Siemens CNC controllers behind a common interface, so one codebase can target either platform.
+\item Developed FANUC PMC Ladder and C motion control for high-speed AFP/ATL machines, compliant with machine and Class 4 laser safety standards.
+\item Achieved <0.3mm volumetric accuracy across a 600+ m$^3$ work envelope through laser-tracker calibration and compensation in Spatial Analyzer.
+\item Provisioned and licensed OEM PCs for air-gapped production systems.
+\item Built Azure Pipelines to enforce PR testing and automate NuGet package versioning and publishing.
+\end{itemize}}
+
+\cventry{2022--2023}{President}{Advanced Robotics at UW}{Seattle, WA}{%
+\begin{itemize}
+\item Led an \textasciitilde 80-member student team to build four competition-winning robots for RoboMaster in one season.
+\item Helped run the team's 501(c)(3), raising \$20k+ in funding; continued as treasurer after graduation.
+\item Developed and maintained STM32F4 embedded control firmware in C++ for motor control and sensor fusion, including contributions to an open-source controls framework (Taproot).
+\item Developed embedded Rust firmware on an STM32F0 to control a 2 kJ capacitor bank.
 \end{itemize}}
 
 \cvsection{Education}
-\cventry{2020--2023}{B.S. Mechanical Engineering}{University of Washington}{Seattle, WA}{Minor in Applied Mathematics, GPA 3.74}
+\cventry{2020--2023}{B.S. Mechanical Engineering (Mechatronics)}{University of Washington}{Seattle, WA}{Minor in Applied Mathematics, GPA 3.74}
 
 \cvsection{Industry Skills}
-\cvskill{Programming}{C\#, TypeScript, C/C++, Python}
-\cvskill{Deployment}{Docker, Docker Compose, GitHub Actions, Azure Pipelines, Aspire}
-\cvskill{IT}{Entra ID, SharePoint, Power Platform, Intune, Ansible}
+\cvskill{Architecture}{Event-Driven Architecture (EDA), MQTT, IIoT/Edge, OPC UA, PKI/X.509, OT/IT Integration}
+\cvskill{Controls}{TwinCAT 3, Structured Text (IEC 61131-3), FANUC PMC, Siemens PLC (TIA Portal)}
+\cvskill{Software}{C\#/.NET (ASP.NET Core, WPF), TypeScript/React, C/C++, Python, SQL, Rust}
+\cvskill{Deployment}{Docker/OCI, Docker Compose, GitHub Actions, Azure Pipelines, Aspire, Ansible}
+\cvskill{IT}{Entra ID, Intune, SharePoint, Power Platform}
 
 \end{document}
