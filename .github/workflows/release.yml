@@ -17,6 +17,19 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
+      - name: Create private.tex from example
+        env:
+          RESUME_PHONE: ${{ secrets.RESUME_PHONE }}
+          RESUME_PHONE_LINK: ${{ secrets.RESUME_PHONE_LINK }}
+        run: |
+          # Keep the example's structure, swapping in the real values.
+          # Values are passed via env and awk -v to avoid shell/sed escaping issues.
+          awk -v phone="$RESUME_PHONE" -v link="$RESUME_PHONE_LINK" '
+            /\\newcommand\{\\phoneMe\}/     { print "\\newcommand{\\phoneMe}{" phone "}"; next }
+            /\\newcommand\{\\phoneMeLink\}/ { print "\\newcommand{\\phoneMeLink}{" link "}"; next }
+            { print }
+          ' private.example.tex > private.tex
+
       - name: Compile (XeLaTeX)
         uses: xu-cheng/latex-action@v4
         with:
