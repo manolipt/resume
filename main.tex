@@ -1,0 +1,197 @@
+%% start of file `template.tex'.
+%% Copyright 2006-2015 Xavier Danaux (xdanaux@gmail.com), 2020-2026 moderncv maintainers (github.com/moderncv).
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License version 1.3c,
+% available at http://www.latex-project.org/lppl/.
+
+
+\documentclass[11pt,a4paper,sans]{moderncv}        % possible options include font size ('10pt', '11pt' (default) and '12pt'), paper size ('a4paper' (default), 'letterpaper', 'a5paper', 'legalpaper', 'executivepaper' and 'landscape'), font family ('sans' and 'roman'), draft state ('draft', 'final' (default)) and skill level symbol ('circle', 'square' (default))
+
+\moderncvcolor{cerulean}                           % color options 'black', 'blue' (default), 'burgundy', 'green', 'grey', 'orange', 'purple' and 'red'; for contemporary style use 'cerulean'
+% moderncv themes
+\moderncvstyle[]{contemporary}                     % style options are 'casual' (default), 'classic', 'banking', 'oldstyle', 'fancy' and 'contemporary'
+                                                   % the 'contemporary' style optionally takes the `qr` (default) or `noqr` options
+%\renewcommand{\familydefault}{\sfdefault}         % to set the default font; use '\sfdefault' for the default sans serif font, '\rmdefault' for the default roman one, or any tex font name
+%\nopagenumbers{}                                  % uncomment to suppress automatic page numbering for CVs longer than one page
+
+% adjust the page margins
+\usepackage[hmargin=0.5in,vmargin=10pt]{geometry}                  % the 'contemporary' style looks better with reduced margins; uncomment the line below for increased margin
+%\usepackage[scale=0.75]{geometry}
+%\setlength{\hintscolumnwidth}{3cm}                % if you want to change the width of the column with the dates
+%\setlength{\makecvheadnamewidth}{10cm}            % for the 'classic' style, if you want to force the width allocated to your name and avoid line breaks. be careful though, the length is normally calculated to avoid any overlap with your personal info; use this at your own typographical risks...
+%\setlength{\listitemsymbolspace}{10pt}            % set custom spacing between list symbol and text item (influences \cvlistitem and \cvlistdoubleitem)
+
+% the 'contemporary' style allows to append additional elements to the head background; uncomment and customize if needed
+%\def\@moderncvheadBackground{
+%}
+
+% font loading
+% for luatex and xetex, do not use inputenc and fontenc
+% see https://tex.stackexchange.com/a/496643
+\ifxetexorluatex
+  \usepackage{fontspec}
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Ligatures=TeX}
+  \setmainfont{Latin Modern Roman}
+  \setsansfont{Latin Modern Sans}
+  \setmonofont{Latin Modern Mono}
+  \setmathfont{Latin Modern Math}
+
+  % you may also consider Fira Sans Light for a extra modern look
+  %\setsansfont[ItalicFont={Fira Sans Light Italic},%
+  %           BoldFont={Fira Sans},%
+  %           BoldItalicFont={Fira Sans Italic}]%
+  %           {Fira Sans Light}%
+\else
+  \usepackage[utf8]{inputenc}
+  \usepackage[T1]{fontenc}
+  \usepackage{lmodern}
+\fi
+
+% document language
+\usepackage[english]{babel}  % FIXME: using spanish breaks moderncv
+
+% personal data
+\name{Manoli Philip}{Tramountanas}
+%\title{Automation Engineer}                               % optional, remove / comment the line if not wanted
+%\born{2 July 2002}                                 % optional, remove / comment the line if not wanted
+%\address{street and number}{postcode city}{country}% optional, remove / comment the line if not wanted; the "postcode city" and "country" arguments can be omitted or provided empty
+\phone[mobile]{REDACTED}                   % optional, remove / comment the line if not wanted; the optional "type" of the phone can be "mobile" (default), "fixed" or "fax"
+%\phone[fixed]{+2~(345)~678~901}
+%\phone[fax]{+3~(456)~789~012}
+\email{manoli@manolipt.com}                               % optional, remove / comment the line if not wanted
+%\homepage{www.johndoe.com}                         % optional, remove / comment the line if not wanted
+
+% Social icons
+\social[linkedin]{manoliptram}                        % optional, remove / comment the line if not wanted
+\social[github]{manolipt}                              % optional, remove / comment the line if not wanted
+
+%\extrainfo{additional information}                 % optional, remove / comment the line if not wanted
+%\photo[64pt][2pt]{picture}                       % optional, remove / comment the line if not wanted; '64pt' is the height the picture must be resized to, 2pt is the thickness of the frame around it (put it to 0pt for no frame) and 'picture' is the name of the picture file
+%\quote{Some quote}                                 % optional, remove / comment the line if not wanted
+
+% bibliography adjustments (only useful if you make citations in your resume, or print a list of publications using BibTeX)
+%   to show numerical labels in the bibliography (default is to show no labels)
+%\makeatletter\renewcommand*{\bibliographyitemlabel}{\@biblabel{\arabic{enumiv}}}\makeatother
+\renewcommand*{\bibliographyitemlabel}{[\arabic{enumiv}]}
+%   to redefine the bibliography heading string ("Publications")
+%\renewcommand{\refname}{Articles}
+
+% bibliography with multiple entries
+%\usepackage{multibib}
+%\newcites{book,misc}{{Books},{Others}}
+%----------------------------------------------------------------------------------
+%            content
+%----------------------------------------------------------------------------------
+\begin{document}
+%-----       resume       ---------------------------------------------------------
+\makecvtitle
+
+\section{Experience}
+\cventry{2025--Present}{Senior Automation Engineer}{Modumetal}{Snohomish}{WA}{
+  \begin{itemize}
+  \item Designed and built the NanoPro 5.0 software platform for nanolamination control in TwinCAT.
+    \begin{itemize}
+    \item Created initial PLC software package from scratch in a week to support an emergency deployment only a month into employment.
+    \item Developed reusable standard library using OOP with Structured Text (ST) to easily slot new device drivers into existing process logic.
+    \item Reduced deployment preparation time from 90+ days to 20 business days (>70\% reduction).
+    \item Supported 10+ successful global deployments of the technology at customer electroplating lines.
+    \end{itemize}
+  \item Shouldered additional IT responsibilities to improve employee productivity and facilitate necessary tool access.
+    \begin{itemize}
+    \item Worked with the company's MSP to accomodate the use of software development and engineering tools.
+    \item Overhauled SharePoint intranet to support implementation of a QMS for ISO 9001 compliance.
+    \item Led integration efforts to grant access to and develop company security postures around AI tools.
+    \item Developed endpoint management policies in Intune to allow company employees to use macOS devices.
+    \end{itemize}
+  \item Supporting the implementation of a company web portal for elevated customer experience.
+    \begin{itemize}
+    \item Provided React frontend development guidance to junior engineers while learning the technology.
+    \item Utilizing ASP.NET Core to create a backend API with supporting relational database and blob storage.
+    \item Setting up infrastructure-as-code using Aspire to make deployment straightforward and reproducible.
+    \end{itemize}
+  \item Architecting the next-generation NanoPro platform using modern software development technologies.
+    \begin{itemize}
+    \item Utilizing event-driven architecture (EDA) with a custom MQTT schema for separation-of-concerns.
+    \item Creating a modern web-based HMI using ASP.NET Core Web API with a React frontend.
+    \item Streamlining deployment techniques with OCI containers.
+    \item Bootstrapping a PKI system designed ground-up for the NanoPro fleet.
+    \end{itemize}
+  \item Supervising two early-career engineers to assist in feature development and global deployment support.
+  \end{itemize}
+}
+
+\cventry{2023--2025}{Controls Engineer}{Electroimpact}{Mukilteo}{WA}{
+  \begin{itemize}
+  \item Developed FANUC PMC Ladder and C motion control programs compliant with machine and class 4 laser safety standards in high-speed manufacturing.
+  \item Utilized laser tracking with Spatial Analyzer to reduce machine error to under 0.3 millimeters in a work envelope over 600 cubic meters in volume.
+  \item Built a company UI framework in C\# with WPF to streamline HMI development for machines utilizing FANUC and Siemens CNC controllers.
+  \item Managed acquisition and deployment of OEM PCs and appropriate licenses for air-gapped systems.
+  \item Supported legacy WinForms HMI applications to improve operator experience and efficiency.
+  \item Assisted in process development for Automated Fiber Placement (AFP) and Automated Tape Layup (ATL) machines to optimize machine performance and layup quality.
+  \end{itemize}
+}
+
+\section{Education}  % for 'contemporary' style use optional argument for displaying an icon, e.g. \section[\faIcon{graduation-cap}]{Education}
+\cventry{2020--2023}{B.S. Mechanical Engineering}{University Of Washington}{Seattle}{\textit{3.74}}{Minor in Applied Mathematics}
+
+\section{Industry Skills}
+\cvitem{Programming}{C\#, Typescript, C/C++, Python}
+\cvitem{Deployment}{Docker, Docker Compose, GitHub Actions, Azure Pipelines, Aspire}
+\cvitem{IT}{Entra ID, SharePoint, Power Platform, Intune, Ansible}
+
+\section{References}
+\begin{itemize}
+\item \textbf{Nathan Yuhl} - Phone
+\item \textbf{Shaun Wurzner} - Phone
+\item \textbf{Mike Henscheid} - Phone
+\item \textbf{Wesley Proudlove} - Phone
+\end{itemize}
+
+% Publications from a BibTeX file without multibib
+%  for numerical labels: \renewcommand{\bibliographyitemlabel}{\@biblabel{\arabic{enumiv}}}% CONSIDER MERGING WITH PREAMBLE PART
+%  to redefine the heading string ("Publications"): \renewcommand{\refname}{Articles}
+\nocite{*}
+\bibliographystyle{plain}
+\bibliography{publications}                        % 'publications' is the name of a BibTeX file
+
+% Publications from a BibTeX file using the multibib package
+%\section{Publications}
+%\nocitebook{book1,book2}
+%\bibliographystylebook{plain}
+%\bibliographybook{publications}                   % 'publications' is the name of a BibTeX file
+%\nocitemisc{misc1,misc2,misc3}
+%\bibliographystylemisc{plain}
+%\bibliographymisc{publications}                   % 'publications' is the name of a BibTeX file
+
+\clearpage
+%-----       letter       ---------------------------------------------------------
+% recipient data
+\recipient{Company Recruitment team}{Company, Inc.\\123 somestreet\\some city}
+\date{January 01, 1984}
+\subject{Job application}
+\opening{Dear Sir or Madam,}
+\closing{Yours faithfully,}
+%\signature{0.9}{signature.png}                     % optional, remove / comment the line if not wanted: first argument goes to \includegraphics > scale
+%\postscript{An optional postscript}                % optional, add a postscript
+\enclosure[Attached]{curriculum vit\ae{}}          % use an optional argument to use a string other than "Enclosure", or redefine \enclname
+\makelettertitle
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ullamcorper neque sit amet lectus facilisis sed luctus nisl iaculis. Vivamus at neque arcu, sed tempor quam. Curabitur pharetra tincidunt tincidunt. Morbi volutpat feugiat mauris, quis tempor neque vehicula volutpat. Duis tristique justo vel massa fermentum accumsan. Mauris ante elit, feugiat vestibulum tempor eget, eleifend ac ipsum. Donec scelerisque lobortis ipsum eu vestibulum. Pellentesque vel massa at felis accumsan rhoncus.
+
+Suspendisse commodo, massa eu congue tincidunt, elit mauris pellentesque orci, cursus tempor odio nisl euismod augue. Aliquam adipiscing nibh ut odio sodales et pulvinar tortor laoreet. Mauris a accumsan ligula. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse vulputate sem vehicula ipsum various nec tempus dui dapibus. Phasellus et est urna, ut auctor erat. Sed tincidunt odio id odio aliquam mattis. Donec sapien nulla, feugiat eget adipiscing sit amet, lacinia ut dolor. Phasellus tincidunt, leo a fringilla consectetur, felis diam aliquam urna, vitae aliquet lectus orci nec velit. Vivamus dapibus various blandit.
+
+Duis sit amet magna ante, at sodales diam. Aenean consectetur porta risus et sagittis. Ut interdum, enim various pellentesque tincidunt, magna libero sodales tortor, ut fermentum nunc metus a ante. Vivamus odio leo, tincidunt eu luctus ut, sollicitudin sit amet metus. Nunc sed orci lectus. Ut sodales magna sed velit volutpat sit amet pulvinar diam venenatis.
+
+Albert Einstein discovered that $e=mc^2$ in 1905.
+
+\[ e=\lim_{n \to \infty} \left(1+\frac{1}{n}\right)^n \]
+
+\makeletterclosing
+
+%\clearpage\end{CJK*}                              % if you are typesetting your resume in Chinese using CJK; the \clearpage is required for fancyhdr to work correctly with CJK, though it kills the page numbering by making \lastpage undefined
+\end{document}
+
+
+%% end of file `template.tex'.
