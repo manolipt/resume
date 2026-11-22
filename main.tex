@@ -5,7 +5,8 @@
 %%
 %% Building blocks:
 %%   \cvsection{Title}                                   new section (starts a new timeline)
-%%   \cventry{dates}{role}{org}{location}{body}          timeline entry; body = text or bullets
+%%   \cventry{org}{location}{positions}                  employer/school heading; holds one or more:
+%%     \cvposition{dates}{role}{body}                    timeline entry; body = text or bullets
 %%   \cvitem{Label}{text}   \cvskill{Label}{a, b, c}     label + text rows (skill rows use mono)
 %%   \begin{cvrefs}\cvref{Name}{detail}\end{cvrefs}      two-column references
 %%   itemize / nested itemize                            bullets (two levels are styled)
@@ -30,7 +31,8 @@
 
 \cvsection{Experience}
 
-\cventry{2026--Present}{Senior Automation Engineer}{Modumetal}{Snohomish, WA}{%
+\cventry{Modumetal}{Snohomish, WA}{%
+\cvposition{2026--Present}{Senior Automation Engineer}{%
 \begin{itemize}
 \item Architect the next-generation NanoPro edge platform. It uses an event-driven MQTT layer to separate device control, process logic, and HMI; runs as OCI-containerized services; and has a purpose-built PKI for device identity across the fleet.
 \item Hired and led two early-career engineers through feature development and on-site deployment support. Both were independently handling customer deployments within 6 months of onboarding.
@@ -38,15 +40,15 @@
 \item Build the web HMI and customer portal on ASP.NET Core and React, with relational and blob storage, using Aspire for infrastructure-as-code.
 \item Drove OT/IT integration: endpoint policy in Intune (including macOS), security posture for AI tool adoption, GitHub Enterprise administration, and a SharePoint QMS supporting ISO 9001.
 \end{itemize}}
-
-\cventry{2025--2026}{Automation Engineer}{Modumetal}{Snohomish, WA}{%
+\cvposition{2025--2026}{Automation Engineer}{%
 \begin{itemize}
 \item Designed and built the NanoPro 5.0 control platform in TwinCAT, shipping the first PLC package in one week for an emergency customer deployment a month after joining.
 \item Built a reusable object-oriented Structured Text library so new device drivers plug into existing process logic, cutting deployment prep from 90+ days to 20 business days (>70\%).
 \item Delivered 4 software deployments solo on customer electroplating lines across 4 countries.
-\end{itemize}}
+\end{itemize}}}
 
-\cventry{2022--2025}{Controls Engineer (2023--2025); Controls Engineering Intern (2022)}{Electroimpact}{Mukilteo, WA}{%
+\cventry{Electroimpact}{Mukilteo, WA}{%
+\cvposition{2023--2025}{Controls Engineer}{%
 \begin{itemize}
 \item Designed a C\#/WPF HMI framework that abstracts FANUC and Siemens CNC controllers behind a common interface, so one codebase can target either platform.
 \item Developed FANUC PMC Ladder and C motion control for high-speed AFP/ATL machines, compliant with machine and Class 4 laser safety standards.
@@ -54,19 +56,22 @@
 \item Provisioned and licensed OEM PCs for air-gapped production systems.
 \item Built Azure Pipelines to enforce PR testing and automate NuGet package versioning and publishing.
 \end{itemize}}
+\cvposition{2022}{Controls Engineering Intern}{}}
 
-\cventry{2022--2023}{President}{Advanced Robotics at UW}{Seattle, WA}{}
-\cventry{2021--2022}{Control Systems Lead}{Advanced Robotics at UW}{}{}
-\cventry{2020--2021}{Control Systems Member}{Advanced Robotics at UW}{}{%
+\cventry{Advanced Robotics at UW}{Seattle, WA}{%
+\cvposition{2022--2023}{President}{}
+\cvposition{2021--2022}{Control Systems Lead}{}
+\cvposition{2020--2021}{Control Systems Member}{%
 \begin{itemize}
 \item Led an \textasciitilde 80-member student team to build four competition-winning robots for RoboMaster in one season.
 \item Helped run the team's 501(c)(3), raising \$20k+ in funding; continued as treasurer after graduation.
 \item Developed and maintained STM32F4 embedded control firmware in C++ for motor control and sensor fusion, including contributions to an open-source controls framework (Taproot).
 \item Developed embedded Rust firmware on an STM32F0 to control a 2 kJ capacitor bank.
-\end{itemize}}
+\end{itemize}}}
 
 \cvsection{Education}
-\cventry{2020--2023}{B.S. Mechanical Engineering (Mechatronics)}{University of Washington}{Seattle, WA}{Minor in Applied Mathematics, GPA 3.74}
+\cventry{University of Washington}{Seattle, WA}{%
+\cvposition{2020--2023}{B.S. Mechanical Engineering (Mechatronics)}{Minor in Applied Mathematics, GPA 3.74}}
 
 \cvsection{Industry Skills}
 \cvskill{Architecture}{Event-Driven Architecture (EDA), MQTT, IIoT/Edge, OPC UA, PKI/X.509, OT/IT Integration}

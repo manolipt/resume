@@ -20,7 +20,7 @@
 \newlength{\rsBandH}    \setlength{\rsBandH}{2.45cm}   % header band height
 \newlength{\rsHintW}    \setlength{\rsHintW}{2.35cm}   % date / label column
 \newlength{\rsSepW}     \setlength{\rsSepW}{0.4cm}     % gap between date column and text (timeline sits here)
-\newlength{\rsTop}      \setlength{\rsTop}{3.0cm}      % top margin (clears the header band)
+\newlength{\rsTop}      \setlength{\rsTop}{2.6cm}      % top margin (clears the header band)
 
 \geometry{top=\rsTop}
 
@@ -85,14 +85,22 @@
   \hspace{\rsSepW}%
   \begin{minipage}[t]{\dimexpr\textwidth-\rsHintW-\rsSepW\relax}#2\end{minipage}\par\vspace{#3}}
 
-% \cventry{dates}{Role or degree}{Organization}{Location}{description or bullets}
-%   Location is right-aligned. Organization, location and description may be left empty.
-\newcommand{\cventry}[5]{%
+% \cventry{Organization}{Location}{positions}
+%   Full-width heading row: organization at the left margin (heading face, underlined),
+%   working location right-aligned; each entry starts its own timeline; followed by one or more \cvposition rows.
+\newcommand{\cventry}[3]{\rs@resetchain\vspace{2pt}%
+  \noindent\strut\textcolor{steellight}{\rule[-0.28em]{\textwidth}{0.4pt}}\hspace{-\textwidth}%
+  {\setlength{\fboxsep}{0pt}\colorbox{white}{{\dsHeadFont\color{ink}\large #1}\,}}%
+  \hfill\ifblank{#2}{}{{\setlength{\fboxsep}{0pt}\colorbox{white}{\,\textcolor{steel}{\itshape #2}}}}\par\vspace{1pt}%
+  #3\vspace{-1pt}}
+
+% \cvposition{dates}{Role}{description or bullets}
+%   One timeline node per position; dates go in the left column. Description may be empty.
+\newcommand{\cvposition}[3]{%
   \rs@row{#1}{%
     \rs@milestone
-    \strut{\bfseries #2}\ifblank{#3}{}{, \textit{#3}}%
-    \ifblank{#4}{}{\hfill #4}\par
-    #5}{3pt}}
+    \strut{\bfseries #2}\par
+    #3}{1pt}}
 
 % \cvitem{Label}{text}   -- label in the date column, text in body font
 \newcommand{\cvitem}[2]{\rs@row{#1}{#2}{2pt}}
