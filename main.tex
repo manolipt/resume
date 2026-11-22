@@ -12,12 +12,13 @@
 %% To drop a section or entry, delete or comment out its lines.
 \documentclass[10pt,a4paper]{article}
 \usepackage{resume}
+\IfFileExists{private.tex}{\input{private.tex}}{\input{private.example.tex}}
 \hypersetup{pdftitle={Manoli Philip Tramountanas, Resume},pdfauthor={Manoli Philip Tramountanas}}
 
 \begin{document}
 
 \resumehead{Manoli Philip Tramountanas}{%
-  \contact[tel:REDACTED]{\iconphone}{REDACTED}
+  \contact[\phoneMeLink]{\iconphone}{\phoneMe}
   \contact[mailto:manoli@manolipt.com]{\iconmail}{manoli@manolipt.com}
   \contact[https://linkedin.com/in/manoliptram]{\iconlinkedin}{manoliptram}
   \contact[https://github.com/manolipt]{\icongithub}{manolipt}}
@@ -73,13 +74,5 @@
 \cvskill{Programming}{C\#, TypeScript, C/C++, Python}
 \cvskill{Deployment}{Docker, Docker Compose, GitHub Actions, Azure Pipelines, Aspire}
 \cvskill{IT}{Entra ID, SharePoint, Power Platform, Intune, Ansible}
-
-\cvsection{References}
-\begin{cvrefs}
-  \cvref{Nathan Yuhl}{Phone}
-  \cvref{Shaun Wurzner}{Phone}
-  \cvref{Mike Henscheid}{Phone}
-  \cvref{Wesley Proudlove}{Phone}
-\end{cvrefs}
 
 \end{document}

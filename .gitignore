@@ -20,3 +20,6 @@
 # Build outputs
 /build/
 
+# Secrets Files
+private.tex
+
