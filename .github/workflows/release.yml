@@ -3,6 +3,9 @@ name: Build and release resume
 on:
   push:
     branches: [main]
+    paths:
+      - "**.tex"
+      - "**.sty"
   workflow_dispatch:
 
 # Serialize runs so the per-day build counter can't race.
@@ -17,12 +20,12 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0 # need existing tags to compute the build number
 
       - name: Compile (XeLaTeX)
-        uses: xu-cheng/latex-action@v3
+        uses: xu-cheng/latex-action@v4
         with:
           root_file: main.tex
           latexmk_use_xelatex: true
