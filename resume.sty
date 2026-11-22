@@ -102,6 +102,13 @@
     \strut{\bfseries #2}\par
     #3}{1pt}}
 
+% \cveducation{dates}{Major}{Minor}{GPA}
+%   Single line: major - minor, with the GPA right-aligned.
+\newcommand{\cveducation}[4]{%
+  \rs@row{#1}{%
+    \rs@milestone
+    \strut{\bfseries #2}\ifblank{#3}{}{\ -- #3}\hfill\ifblank{#4}{}{GPA #4}}{1pt}}
+
 % \cvitem{Label}{text}   -- label in the date column, text in body font
 \newcommand{\cvitem}[2]{\rs@row{#1}{#2}{2pt}}
 % \cvskill{Label}{a, b, c}   -- same, text in the mono face
